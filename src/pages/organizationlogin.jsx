@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '../components/logo.jpg';
 import { useAuth } from '../auth/authcontext';
 
@@ -6,18 +7,18 @@ const Enterdetailsorg = () => {
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const { Adminsignin } = useAuth();
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      userid: userid,
-      password: password,
-    };
     if (userid === "adminsignin" && password === "12345") {
       setUserId('');
       setPassword('');
       Adminsignin();
+      navigate('/checkin'); // Redirect to /checkin after login
     }
   };
+
   return (
     <div className="w-full h-screen font-sans bg-cover bg-landscape">
       <div className="container flex items-center justify-center flex-1 h-full mx-auto">
@@ -36,10 +37,9 @@ const Enterdetailsorg = () => {
                   <input
                     type="text"
                     value={userid}
-                    onChange={(e)=>setUserId(e.target.value)}
+                    onChange={(e) => setUserId(e.target.value)}
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     placeholder="User Id"
-                    
                   />
                 </div>
               </div>
@@ -48,7 +48,7 @@ const Enterdetailsorg = () => {
                   <input
                     type="password"
                     value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     placeholder="Password"
                   />
