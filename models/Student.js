@@ -13,10 +13,6 @@ const studentSchema = new mongoose.Schema({
   lastName: { type: String, required: true }
 });
 
-const LocalFormSubmission = mongoose.model('LocalFormSubmission', studentSchema);
-const AtlasFormSubmission = mongoose.model('AtlasFormSubmission', studentSchema);
-
-module.exports = { LocalFormSubmission, AtlasFormSubmission };
 
 
 studentSchema.pre('save', async function(next){
@@ -50,4 +46,7 @@ studentSchema.methods.comparePassword = async function(candidatePassword){
   }
 }
 
-module.exports = { LocalFormSubmission, AtlasFormSubmission };
+
+const Student = mongoose.model('Student', studentSchema);
+
+module.exports = Student;
